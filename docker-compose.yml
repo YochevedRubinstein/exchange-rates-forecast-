@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  server:
+    build: ./server
+    container_name: exchange_server
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./server:/app
+    command: python src/main.py
+
+  client:
+    build: ./client
+    container_name: exchange_client
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/app
+    command: npm start
+    depends_on:
+      - server
