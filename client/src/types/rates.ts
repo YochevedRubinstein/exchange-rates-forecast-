@@ -9,14 +9,6 @@ export interface IExchangeRate {
   rates: IRate[];
 }
 
-export interface ICurrentRate {
-  rate: number; 
-}
-
-export interface INextRate {
-  rate: number;
-}
-
 export interface IConnectionStatus {
   status: string;
   message: string;

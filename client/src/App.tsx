@@ -11,25 +11,16 @@ import { IExchangeFilter } from './types/filters';
 
 const App: React.FC = () => {
   const [rates, setRates] = useState<IRate[]>([]);
-  // const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const handleSearch = async (filters: IExchangeFilter) => {
-    // console.log('Current filters:', filters);
-  
-    // setLoading(true);
-    // console.log('Searching with filters:', filters);
-  
     try {
       const data = await fetchExchangeRates(filters);
-      // console.log('Fetched data:', data); 
       setRates(data);
     } catch (error: any) {
       console.error('Error during search:', error);
       setError(error.message);
-    } finally {
-      // setLoading(false);
-    }
+    } 
   };
   
   useEffect(() => {
