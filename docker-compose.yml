@@ -1,22 +1,66 @@
 version: "3.9"
 
 services:
+  db:
+    image: mysql:8.0
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - exchange_net
+
+
+  jobs:
+    build: ./jobs
+    container_name: exchange_jobs
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_NAME: ${MYSQL_DATABASE}
+      DB_USER: ${MYSQL_USER}
+      DB_PASS: ${MYSQL_PASSWORD}
+      EXCHANGE_RATE_URL: ${EXCHANGH_RATE_URL}
+      EXCHANGE_RATE_API_KEY: ${EXCHANGH_RATE_API_KEY}
+    networks:
+      - exchange_net
+
   server:
     build: ./server
     container_name: exchange_server
     ports:
       - "8000:8000"
-    volumes:
-      - ./server:/app
-    command: python src/main.py
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_NAME: ${MYSQL_DATABASE}
+      DB_USER: ${MYSQL_USER}
+      DB_PASS: ${MYSQL_PASSWORD}
+      EXCHANGE_RATE_URL: ${EXCHANGH_RATE_URL}
+      EXCHANGE_RATE_API_KEY: ${EXCHANGH_RATE_API_KEY}
+    networks:
+      - exchange_net
 
   client:
     build: ./client
     container_name: exchange_client
     ports:
       - "3000:3000"
-    volumes:
-      - ./client:/app
-    command: npm start
     depends_on:
       - server
+
+volumes:
+  mysql-data:
+    driver: local
+
+networks:
+  exchange_net:
+    driver: bridge

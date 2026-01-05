@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS monthly_exchange_rates(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    year_month VARCHAR(7) NOT NULL,
+    average_rate DECIMAL(10,4) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+);

@@ -4,9 +4,17 @@ WORKDIR /app
 
 COPY package.json package-lock.json ./
 
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 COPY . .
+
+RUN npm install @mui/x-date-pickers
+
+RUN npm install date-fns
+
+RUN npm install @emotion/react @emotion/styled
+
+RUN npm install @mui/material
 
 RUN npm run build
 

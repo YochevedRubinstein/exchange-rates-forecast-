@@ -1,0 +1,22 @@
+.header {
+    background-color: rgb(77, 77, 77);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-column: 1 / 5;
+    grid-row: 1;
+    padding: 10px 20px;
+}
+
+h1 {
+    color:rgb(211, 80, 124);
+    font-size: 2rem;
+    margin: 0;
+    flex-grow: 1;
+    text-align: center; 
+}
+
+.rates {
+    display: flex;
+    gap: 10px;
+}

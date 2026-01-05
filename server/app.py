@@ -1,10 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.routes.exchange_rate_route import router as exchange_rate_router
 
 app = FastAPI()
-
-app.include_router(exchange_rate_router)
 
 app.add_middleware(
     CORSMiddleware,

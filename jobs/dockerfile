@@ -5,9 +5,13 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY scripts/ scripts/
 
-EXPOSE 8000
+RUN apt-get update && apt-get install -y cron && rm -rf /var/lib/apt/lists/*
+
+RUN echo "0 2 1 * * python /app/scripts/monthly_update.py" > /etc/cron.d/monthly \
+ && chmod 0644 /etc/cron.d/monthly \
+ && crontab /etc/cron.d/monthly
 
 ADD https://netfree.link/dl/unix-ca.sh /home/netfree-unix-ca.sh
 RUN cat /home/netfree-unix-ca.sh | sh
@@ -15,5 +19,4 @@ ENV NODE_EXTRA_CA_CERTS=/etc/ca-bundle.crt
 ENV REQUESTS_CA_BUNDLE=/etc/ca-bundle.crt
 ENV SSL_CERT_FILE=/etc/ca-bundle.crt
 
-
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD python scripts/restart_db.py && cron -f

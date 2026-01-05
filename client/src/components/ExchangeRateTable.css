@@ -1,0 +1,27 @@
+.table {
+    background-color: rgb(45, 45, 51);
+    grid-column: 1;
+    grid-row: 2/10;
+}
+
+table {
+    height:100%;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #505050;
+}
+
+.min-rate {
+    box-sizing: border-box;
+    border: 10px solid rgb(219, 67, 67);
+}
+
+.max-rate {
+    box-sizing: border-box;
+    border: 10px solid rgb(66, 177, 66);
+}
