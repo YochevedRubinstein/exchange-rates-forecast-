@@ -8,9 +8,7 @@ const NextMonthRate: React.FC = () => {
       const loadRate = async () => {
         try {
           const nextRateData = await fetchNextRate();
-          console.log("Next month rate data:", nextRateData);
           setNextRate(nextRateData);
-          console.log("Next month rate fetched in component:", nextRate);
         } catch (err) {
           console.error(err);
         }

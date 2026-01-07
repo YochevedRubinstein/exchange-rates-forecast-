@@ -35,11 +35,9 @@ const ExchangeRateGraph: React.FC<IExchangeRate> = ({ rates }) => {
         responsive: true,
         maintainAspectRatio: false,
     }
-    // console.log("Rendering ExchangeRateGraph with data");
     
     return (
         <div className="graph">
-            {/* <h2>Exchange Rate Graph</h2> */}
             <Line data={chartData} options={chartOptions} />
         </div>
     );

@@ -1,4 +1,4 @@
-from src.utils.db import Base
+from ..services.db import Base
 from sqlalchemy import Column, Integer, String, DECIMAL
 
 class MonthlyExchangeRate(Base):

@@ -10,8 +10,6 @@ const CurrentRate: React.FC = () => {
     const loadRate = async () => {
       try {
         const currentRate = await fetchCurrentRate();
-        console.log("Current rate fetched in component:", currentRate);
-
         setTodaysRate(currentRate);
       } catch (err) {
         console.error(err);

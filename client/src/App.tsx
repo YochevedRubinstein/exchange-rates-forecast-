@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { fetchExchangeRates } from './services/api';
 import { IRate } from './types/rates';
-import SearchBox from './components/SearchBox';
+import SearchBox from './components/searchBox/SearchBox';
 import ExchangeRateTable from './components/ExchangeRateTable';
 import ExchangeRateHeader from './components/ExchangeRateHeader';
 import ExchangeRateGraph from './components/ExchangeRateGraph';
-import Forecast from './components/Forecast';
+import Forecast from './components/forecast/Forecast';
 import { IExchangeFilter } from './types/filters';
 
 const App: React.FC = () => {
@@ -25,8 +25,6 @@ const App: React.FC = () => {
   
   useEffect(() => {
     const initialFetch = async () => {
-      // console.log("initial fetch");
-      // setLoading(true);
       try {
         const data = await fetchExchangeRates({
           months:[],
@@ -40,17 +38,13 @@ const App: React.FC = () => {
         setRates(data);
       } catch (error: any) {
         setError(error.message);
-      } finally {
-        // setLoading(false);
       }
     };
     if (rates.length === 0) {
-      // console.log("Fetching initial data (rates.length === 0)"); 
       initialFetch();
     }
   }, []); 
 
-  // if (loading) return <div>Loading...</div>;
   if (error)console.log("Error", {error});
 
   return (

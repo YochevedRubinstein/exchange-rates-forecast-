@@ -3,14 +3,7 @@ export const apiClient = async <T>(
   params?: { method: string; body?: string; headers?: Record<string, string> }
 ): Promise<T> => {
   const API_URL = import.meta.env.VITE_API_URL;
-  console.log("API_URL:", API_URL);
-  
   const url = new URL(`${API_URL}${endpoint}`);
-  console.log("Constructed URL:", url.toString());
-  
-  console.log(`API Request: ${url.toString()}`);
-  console.log(`Method: ${params?.method || 'GET'}`);
-
   try {
     const res = await fetch(url.toString(), {
       method: params?.method || 'GET',

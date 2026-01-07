@@ -1,5 +1,6 @@
 import { apiClient } from './apiClient';
-import { IRate, IExchangeRate, IConnectionStatus } from '../types/rates';
+import { IRate, IConnectionStatus } from '../types/rates';
+import { IForecastResponse } from '../types/forecastResponse';
 import { IExchangeFilter } from '../types/filters';
 
 export const checkConnection = async (): Promise<IConnectionStatus> => {
@@ -15,18 +16,20 @@ export const fetchExchangeRates = async (filters: IExchangeFilter): Promise<IRat
       'Content-Type': 'application/json',
     },
   });
-  console.log("Fetched exchange rates:", data, "\nwith filters:", filters);
   return data;
 };
 
 export const fetchCurrentRate = async (): Promise<number> => {
   const data = await apiClient<number>('/current-exchange-rate');
-  console.log("Fetched current rate:", data);
   return data;
 };
 
 export const fetchNextRate = async (): Promise<number> => {
   const data = await apiClient<number>('/next-month-exchange-rate');
-    console.log("Fetched next rate:", data);
   return data;
 };
+
+export const fetchForecast = async (): Promise<IForecastResponse> => {
+    const data = await apiClient<IForecastResponse>('/forecast');
+    return data;
+}
