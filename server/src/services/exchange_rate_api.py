@@ -15,5 +15,5 @@ def get_current_rate() -> float:
             return round(current_rate, 4)
         else:
             print(f"Error: {response.status_code} - {response.text}")
-    except: 
+    except Exception as e: 
         raise RuntimeError(f"Failed to get current exchange rate {e}")

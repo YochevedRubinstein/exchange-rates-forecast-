@@ -1,0 +1,4 @@
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+0 17 7 * * root python /app/scripts/monthly_update.py >> /var/log/cron.log 2>&1
